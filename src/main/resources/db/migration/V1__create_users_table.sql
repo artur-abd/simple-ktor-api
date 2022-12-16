@@ -1,4 +1,4 @@
-CREATE TABLE users
+CREATE TABLE Users
 (
     id           INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     name         VARCHAR(255) not NULL,
