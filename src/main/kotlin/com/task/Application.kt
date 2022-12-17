@@ -19,6 +19,7 @@ fun main() {
 }
 
 fun Application.module() {
+    DatabaseFactory.init()
     install(ContentNegotiation) {
         json(Json {
             isLenient = true
