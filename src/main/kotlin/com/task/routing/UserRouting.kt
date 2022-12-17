@@ -13,7 +13,7 @@ import org.jetbrains.exposed.sql.transactions.transaction
 fun Application.userRouting() {
     routing {
         route("/user") {
-            post("/add") {
+            post {
                 val newUser: UserSerializable =
                     kotlin.runCatching { call.receiveNullable<UserSerializable>() }.getOrNull()
                         ?: return@post call.respond(HttpStatusCode.MethodNotAllowed, "invalid input")
