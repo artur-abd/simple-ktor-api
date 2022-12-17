@@ -1,0 +1,97 @@
+openapi: "3.0.3"
+info:
+  title: "sevenWinds_task API"
+  description: "sevenWinds_task API"
+  version: "0.0.1"
+servers:
+  - url: "http://0.0.0.0:8080"
+paths:
+  /user:
+    post:
+      description: "get user with given id"
+      requestBody:
+        content:
+          'text/plain':
+            schema:
+              $ref: "#components/schemas/User"
+
+      responses:
+        "405":
+          description: "Method Not Allowed"
+          content:
+            'text/plain':
+              schema:
+                type: "string"
+              examples:
+                Phone number or email already user:
+                  value: "email or phone number already used"
+                Error with user add:
+                  value: "new user add error"
+
+        "200":
+          description: "OK"
+          content:
+            'text/plain':
+              schema:
+                type: "string"
+              examples:
+                Success:
+                  value: "user added with id=1"
+  /user/{id}:
+    get:
+      description: "get user with given id"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+      responses:
+        "400":
+          description: "Bad Request"
+          content:
+            'text/plain':
+              schema:
+                type: "string"
+              example:
+                Ivalid Id:
+
+                  value: "invalid id supplied"
+        "404":
+          description: "Not Found"
+          content:
+            'text/plain':
+              schema:
+                type: "string"
+              example:
+                Not Found:
+                  value: "user not found"
+        "200":
+          description: "OK"
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/User"
+components:
+  schemas:
+    User:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+          example: "Ivan"
+        surname:
+          type: "string"
+          example: "Ivanov"
+        patronymic:
+          type: "string"
+          example: "Ivanovich"
+          nullable: true
+        phoneNumber:
+          type: "string"
+          example: "+77777777777"
+          uniqueItems: true
+        email:
+          type: "string"
+          example: "123@mail.ru"
+          uniqueItems: true
