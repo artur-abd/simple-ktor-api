@@ -1,29 +1,20 @@
 package com.task
 
-import com.zaxxer.hikari.HikariConfig
-import com.zaxxer.hikari.HikariDataSource
-import org.flywaydb.core.Flyway
-import org.jetbrains.exposed.sql.Database
+import com.task.routing.userRouting
+import com.task.storage.DatabaseFactory
+import io.ktor.serialization.kotlinx.json.*
+import io.ktor.server.application.*
+import io.ktor.server.plugins.contentnegotiation.*
+import kotlinx.serialization.json.Json
 
 
-fun initDatabase() {
-    val config = HikariConfig("db.properties")
-    val dataSource = HikariDataSource(config)
-    Flyway.configure().dataSource(dataSource).load().apply { migrate() }
-    Database.connect(dataSource)
-}
-
-fun main() {
-    initDatabase()
-    embeddedServer(Netty, port = 8080, module = Application::module).start(wait = true)
-}
+fun main(args: Array<String>) = io.ktor.server.netty.EngineMain.main(args)
 
 fun Application.module() {
     DatabaseFactory.init()
     install(ContentNegotiation) {
         json(Json {
             isLenient = true
-            prettyPrint = true
         })
     }
     userRouting()
