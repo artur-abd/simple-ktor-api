@@ -41,7 +41,7 @@ fun Application.userRouting() {
                 if (id != null) {
                     call.respond("user added with id=$id")
                 } else {
-                    call.respond(HttpStatusCode.BadRequest)
+                    call.respond(HttpStatusCode.MethodNotAllowed, "new user add error")
                 }
             }
             get("/{id}") {
