@@ -60,7 +60,7 @@ class UserRouteTest {
             setBody(testUser)
         }
         assertEquals(response.status, HttpStatusCode.OK)
-        assert(response.bodyAsText().startsWith("user added with id="))
+        assert(response.bodyAsText().startsWith("User added with id="))
     }
 
 

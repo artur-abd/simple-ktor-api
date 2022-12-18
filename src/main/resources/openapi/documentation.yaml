@@ -8,7 +8,7 @@ servers:
 paths:
   /user:
     post:
-      description: "get user with given id"
+      description: "Get user with given id"
       requestBody:
         content:
           'text/plain':
@@ -24,9 +24,9 @@ paths:
                 type: "string"
               examples:
                 Phone number or email already user:
-                  value: "email or phone number already used"
+                  value: "Email or phone number already used"
                 Error with user add:
-                  value: "new user add error"
+                  value: "New user add error"
 
         "200":
           description: "OK"
@@ -36,7 +36,7 @@ paths:
                 type: "string"
               examples:
                 Success:
-                  value: "user added with id=1"
+                  value: "User added with id=1"
   /user/{id}:
     get:
       description: "get user with given id"
@@ -56,7 +56,7 @@ paths:
               example:
                 Ivalid Id:
 
-                  value: "invalid id supplied"
+                  value: "Invalid id supplied"
         "404":
           description: "Not Found"
           content:
@@ -65,7 +65,7 @@ paths:
                 type: "string"
               example:
                 Not Found:
-                  value: "user not found"
+                  value: "User not found"
         "200":
           description: "OK"
           content:

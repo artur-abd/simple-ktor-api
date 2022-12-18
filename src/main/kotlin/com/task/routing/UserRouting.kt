@@ -18,7 +18,7 @@ fun Application.userRouting() {
             post {
                 val newUser: UserSerializable =
                     kotlin.runCatching { call.receiveNullable<UserSerializable>() }.getOrNull()
-                        ?: return@post call.respond(HttpStatusCode.MethodNotAllowed, "invalid input")
+                        ?: return@post call.respond(HttpStatusCode.MethodNotAllowed, "Invalid input")
                 var id: Int? = null
                 try {
                     transaction {
@@ -34,25 +34,25 @@ fun Application.userRouting() {
                 } catch (ex: ExposedSQLException) {
                     if (ex.message?.contains(Regex("phone_number|email")) == true) {
                         return@post call.respond(
-                            HttpStatusCode.MethodNotAllowed, "email or phone number already used"
+                            HttpStatusCode.MethodNotAllowed, "Email or phone number already used"
                         )
                     }
                 }
                 if (id != null) {
-                    call.respond("user added with id=$id")
+                    call.respond("User added with id=$id")
                 } else {
-                    call.respond(HttpStatusCode.MethodNotAllowed, "new user add error")
+                    call.respond(HttpStatusCode.MethodNotAllowed, "New user add error")
                 }
             }
             get("/{id}") {
                 val id = call.parameters["id"]?.toIntOrNull() ?: return@get call.respond(
-                    HttpStatusCode.BadRequest, "invalid id supplied"
+                    HttpStatusCode.BadRequest, "Invalid id supplied"
                 )
                 val user = transaction {
                     User.findById(id)
                 }
                 if (user == null) {
-                    call.respond(HttpStatusCode.NotFound, "user not found")
+                    call.respond(HttpStatusCode.NotFound, "User not found")
                 } else {
                     call.respond(UserSerializable(user))
                 }
