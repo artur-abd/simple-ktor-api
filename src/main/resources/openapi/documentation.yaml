@@ -8,7 +8,7 @@ servers:
 paths:
   /user:
     post:
-      description: "Get user with given id"
+      description: "Add new user"
       requestBody:
         content:
           'text/plain':
@@ -94,4 +94,8 @@ components:
         email:
           type: "string"
           example: "123@mail.ru"
+          uniqueItems: true
+        id:
+          type: "integer"
+          example: "1"
           uniqueItems: true
