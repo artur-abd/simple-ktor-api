@@ -8,7 +8,7 @@ servers:
 paths:
   /user:
     post:
-      description: "Add new user"
+      description: "Add new user, id not used in this case"
       requestBody:
         content:
           'text/plain':

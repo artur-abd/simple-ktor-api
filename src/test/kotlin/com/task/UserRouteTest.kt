@@ -20,7 +20,7 @@ import kotlin.test.assertEquals
 
 
 class UserRouteTest {
-    val testUser = UserSerializable("ivan", "ivanov", null, "+7777777777", "123@mail.ru")
+    var testUser = UserSerializable("ivan", "ivanov", null, "+7777777777", "123@mail.ru")
     var userId = 0
 
     @BeforeTest
@@ -42,6 +42,7 @@ class UserRouteTest {
                 email = testUser.email
             }.id.value
         }
+        testUser = testUser.copy(id = userId)
         val response = client.get("/user/$userId")
         assertEquals(Json.encodeToString(testUser), response.bodyAsText())
         assertEquals(response.status, HttpStatusCode.OK)

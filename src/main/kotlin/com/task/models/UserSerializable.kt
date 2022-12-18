@@ -12,7 +12,15 @@ data class UserSerializable(
     val surname: String,
     val patronymic: String?,
     val phoneNumber: String,
-    val email: String
+    val email: String,
+    val id: Int = 0
 ) {
-    constructor(user: User) : this(user.name, user.surname, user.patronymic, user.phoneNumber, user.email)
+    constructor(user: User) : this(
+        user.name,
+        user.surname,
+        user.patronymic,
+        user.phoneNumber,
+        user.email,
+        user.id.value
+    )
 }
