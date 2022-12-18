@@ -32,7 +32,7 @@ fun Application.userRouting() {
 
                     }
                 } catch (ex: ExposedSQLException) {
-                    if (ex.message?.contains(Regex("phone_number|email")) == true) {
+                    if (ex.message?.contains("phone_number") == true || ex.message?.contains("email") == true) {
                         return@post call.respond(
                             HttpStatusCode.MethodNotAllowed, "Email or phone number already used"
                         )
