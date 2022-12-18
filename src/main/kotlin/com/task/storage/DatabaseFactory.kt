@@ -11,6 +11,5 @@ object DatabaseFactory {
         val dataSource = HikariDataSource(config)
         Flyway.configure().dataSource(dataSource).load().apply { migrate() }
         Database.connect(dataSource)
-
     }
 }
